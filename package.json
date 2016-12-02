@@ -1,0 +1,31 @@
+{
+  "name": "in-suggest",
+  "version": "1.0.0",
+  "description": "Simple input autocomplete or typeahead",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "cat ./src/styles/base.css ./src/styles/simple.css | cleancss -o ./dist/in-suggest.min.css",
+    "build:iife": "rollup -f iife -n InSuggest -i ./src/index.js -o ./dist/in-suggest.js",
+    "build:module": "rollup -f cjs -n InSuggest -i ./src/index.js -o ./index.js",
+    "build": "run-p build:*",
+    "prepublish": "npm run build:module"
+  },
+  "keywords": [
+    "in-suggest",
+    "suggest",
+    "suggestions",
+    "input",
+    "autocomplete",
+    "typeahead"
+  ],
+  "author": "Yopadd",
+  "license": {
+    "type": "WTFPL",
+    "url": "http://spdx.org/licenses/WTFPL.html#licenseText"
+  },
+  "devDependencies": {
+    "clean-css": "^3.4.21",
+    "npm-run-all": "^3.1.1",
+    "rollup": "^0.36.3"
+  }
+}

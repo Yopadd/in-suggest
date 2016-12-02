@@ -1,0 +1,28 @@
+.in-suggest {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+}
+
+.in-suggest__input {
+    box-sizing: inherit;
+    width: 100%;
+}
+
+.in-suggest__menu {
+    position: relative;
+    box-sizing: inherit;
+    z-index: 99;
+    position: absolute;
+    width: inherit;
+}
+
+.in-suggest__menu__item {
+    cursor: pointer;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.in-suggest__menu.is-hidden {
+    display: none;
+}

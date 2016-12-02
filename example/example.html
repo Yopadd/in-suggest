@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Simple in-suggest</title>
+        <link rel="stylesheet" href="../dist/in-suggest.min.css">
+        <style>
+            body {
+                margin: 0px;
+            }
+
+            .in-suggest {
+                margin: 10px;
+            }
+
+            .rich-suggestions {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+            }
+
+            .rich-suggestions-note {
+                flex-basis: 100px;
+                text-align: center;
+            }
+
+            .rich-suggestions-note-label {
+                font-weight: bold;
+                margin-bottom: 0;
+            }
+
+            .rich-suggestions-note-value {
+                font-size: 200%;
+                margin: 0;
+            }
+
+            .rich-suggestions-content {
+                flex-basis: 300px;
+            }
+
+            .rich-suggestions-content-title {
+                font-size: 110%;
+                font-weight: bold;
+            }
+
+            .rich-suggestions-content-description {
+                margin-left: 5px;
+                text-align: justify;
+            }
+
+            #in-suggest-rich {
+                width: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <label>Simple Suggestions :</label>
+            <input id="in-suggest-simple" type="text" placeholder="Enter a value">
+        </div>
+
+        <div>
+            <label>Object Suggestions :</label>
+            <input id="in-suggest-object" type="text" placeholder="Enter a value" onfocus="clearInput(this)">
+        </div>
+
+        <div>
+            <label>Rich Suggestions :</label>
+            <input id="in-suggest-rich" type="text" placeholder="Enter a value" onfocus="clearInput(this)">
+        </div>
+
+        <script src="../dist/in-suggest.js"></script>
+        <script>
+
+            /*
+                SIMPLE EXAMPLE
+            */
+            const framework = [
+                'React',
+                'Hapi',
+                'Vue',
+                'Symfony',
+                'Laravel',
+                'Express',
+                'Sails',
+                'Angular',
+                'Ionic',
+                'Polymer',
+                'Riot',
+                'Total',
+                'Loopback',
+                'Silex',
+                'https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/'
+            ]
+            const simpleInputAutocomplete = new InSuggest('in-suggest-simple', {
+                action(query, next) {
+                    if (!query) return next(framework)
+                    next(framework.filter(value => value.toLowerCase().startsWith(query.toLowerCase())))
+                },
+
+                selected(d, next) {
+                    console.log(d)
+                    next(d)
+                },
+
+                createItem(d) {
+                    const item = document.createElement('div')
+                    item.innerHTML = d
+                    return item
+                }
+            })
+
+
+            /*
+                OBJECT EXAMPLE
+            */
+            const adherents = [{
+                name: 'Lilas',
+                category: 'Kid',
+            }, {
+                name: 'David',
+                category: 'Adult',
+            }, {
+                name: 'William',
+                category: 'Adult',
+            }]
+            const objectInputAutocomplete = new InSuggest('in-suggest-object', {
+                action(query, next) {
+                    if (!query) return next(adherents)
+                    next(adherents.filter(adherent => adherent.name.toLowerCase().startsWith(query.toLowerCase())))
+                },
+
+                selected(d, next) {
+                    console.log(d)
+                    next(`${d.name} [${d.category}]`)
+                },
+
+                createItem(d) {
+                    const item = document.createElement('div')
+                    item.innerHTML = d.name
+                    return item
+                }
+            })
+
+            /*
+                RICH EXAMPLE
+            */
+            const richAdherents = [{
+                name: 'The Dark Khight',
+                color: 'blue',
+                note: 9,
+                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatum aut soluta'
+            }, {
+                name: 'Transfromers',
+                color: 'green',
+                note: 6,
+                description: 'Enim voluptatum aut soluta, Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            }, {
+                name: 'Ghost in the shell',
+                color: 'pink',
+                note: 8,
+                description: 'Consectetur adipisicing elit. Enim voluptatum aut soluta'
+            }]
+            const richInputAutocomplete = new InSuggest('in-suggest-rich', {
+                action(query, next) {
+                    if (!query) return next(richAdherents)
+                    next(richAdherents.filter(adherent => adherent.name.toLowerCase().startsWith(query.toLowerCase())))
+                },
+
+                selected(d, next) {
+                    console.log(d)
+                    next(d.name)
+                },
+
+                createItem(d) {
+                    const item = document.createElement('div')
+                    item.className = 'rich-suggestions'
+
+                    const descriptionContainer = document.createElement('div')
+                    descriptionContainer.className = 'rich-suggestions-content'
+
+                    const title = document.createElement('p')
+                    title.className = 'rich-suggestions-content-title'
+                    title.textContent = d.name
+
+                    const description = document.createElement('p')
+                    description.className = 'rich-suggestions-content-description'
+                    description.textContent = d.description
+
+                    const noteContainer = document.createElement('div')
+                    noteContainer.className = 'rich-suggestions-note'
+
+                    const noteLabel = document.createElement('p')
+                    noteLabel.className = 'rich-suggestions-note-label'
+                    noteLabel.textContent = 'NOTE'
+
+                    const noteValue = document.createElement('p')
+                    noteValue.className = 'rich-suggestions-note-value'
+                    noteValue.textContent = d.note
+                    noteValue.style.color = d.color
+
+                    descriptionContainer.appendChild(title)
+                    descriptionContainer.appendChild(description)
+
+                    noteContainer.appendChild(noteLabel)
+                    noteContainer.appendChild(noteValue)
+
+                    item.appendChild(descriptionContainer)
+                    item.appendChild(noteContainer)
+
+                    return item
+                }
+            })
+
+            function clearInput(el) {
+                el.value = ''
+            }
+        </script>
+    </body>
+</html>
