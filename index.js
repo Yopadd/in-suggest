@@ -4,7 +4,7 @@ class Menu {
     constructor(el, parent) {
         this.parent = parent;
         this.el = el;
-        this.el.className = 'in-suggest__menu is-hidden';
+        this.el.className = 'in-suggest_menu is-hidden';
         this.el.addEventListener('mouseenter', () => {
             this.el.classList.add('is-hover');
         });
@@ -33,7 +33,7 @@ class Item {
         this.data = data;
         this.id = index;
         this.el = document.createElement('div');
-        this.el.className = 'in-suggest__menu__item';
+        this.el.className = 'in-suggest_menu_item';
         this.el.appendChild(item);
 
         this.el.addEventListener('click', this.parent.click.bind(this.parent, this.data));
@@ -68,10 +68,10 @@ class InSuggest {
         if (this.input.getAttribute('type') !== 'text')
             return this.logError('element input should be have type text')
         if (!options.action || !options.createItem || !options.selected)
-            return this.logError('options "action", "createItem" and "click" is required')
+            return this.logError('options "action", "createItem" and "selected" is required')
 
         const originClasses = this.input.className;
-        this.input.className = 'in-suggest__input';
+        this.input.className = 'in-suggest_input';
 
         this.wrapper = document.createElement('div');
         this.wrapper.className = originClasses;

@@ -4,12 +4,12 @@
     position: relative;
 }
 
-.in-suggest__input {
+.in-suggest_input {
     box-sizing: inherit;
     width: 100%;
 }
 
-.in-suggest__menu {
+.in-suggest_menu {
     position: relative;
     box-sizing: inherit;
     z-index: 99;
@@ -17,12 +17,12 @@
     width: inherit;
 }
 
-.in-suggest__menu__item {
+.in-suggest_menu_item {
     cursor: pointer;
     overflow: hidden;
     word-break: break-all;
 }
 
-.in-suggest__menu.is-hidden {
+.in-suggest_menu.is-hidden {
     display: none;
 }

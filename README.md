@@ -40,6 +40,19 @@ const myInput = new InSuggest('my-input', options)
 
 - __createItem(data)__ is called for each data passed by `action()` - _required_
 
+### Classes
+If you want override the style. Here the template
+```html
+<div class="in-suggest">
+    <input class="in-suggest_input">
+    <div class="in-suggest_menu">
+        <div class="in-suggest_menu_item">
+            // your element returned by createItem
+        </div>
+    </div>
+</div>
+```
+
 #### Example
 ```js
 const myData = ['foo', 'bar']
