@@ -68,10 +68,12 @@ export default class InSuggest {
         if (!options.action || !options.createItem || !options.selected)
             return this.logError('options "action", "createItem" and "click" is required')
 
+        const originClasses = this.input.className
         this.input.className = 'in-suggest__input'
 
         this.wrapper = document.createElement('div')
-        this.wrapper.className = 'in-suggest'
+        this.wrapper.className = originClasses
+        this.wrapper.classList.add('in-suggest')
         this.wrapper.id = this.input.id
         this.input.removeAttribute('id')
 
