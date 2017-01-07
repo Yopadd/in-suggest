@@ -1,6 +1,6 @@
 {
   "name": "in-suggest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple input autocomplete or typeahead",
   "main": "index.js",
   "scripts": {
